@@ -203,7 +203,7 @@ def book ():
 
     # Send request to goodbooks api
     res = {'books': ['hi', 'you']} # requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": KEY, "isbns": isbn})
-    # res = res.json()
+    res = res.json()
 
     if msg != None:
         return render_template("book.html", rows=rows, usernames=usernames, message=msg, res=res)
