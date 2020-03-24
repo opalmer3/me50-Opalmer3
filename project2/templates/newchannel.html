@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}: Add new channel{% endblock %}
+
+{% block main %}
+<div class="top-box">
+  <form id="newChannelForm" action="/newchannel" method="post">
+    <input type="text" name="name" placeholder="Conversation title" autocomplete="off">
+    <button class="btn btn-dark" type="submit" disabled="true" name="displayname" value="">Add</button>
+  </form>
+  {{msg}}
+</div>
+
+  <script src="{{url_for('static', filename='newchannel.js')}}" charset="utf-8"></script>
+{% endblock %}

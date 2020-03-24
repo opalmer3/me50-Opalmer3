@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+
+{% block main %}
+<div class="top-box">
+<div id="displayform"></div>
+<div id="welcome"></div>
+</div>
+
+<div class="channels">
+  <table class="table table-hover">
+<thead>
+  <tr>
+    <th>Topic</th>
+    <th>Created by</th>
+    <th>Last active</th>
+  </tr>
+</thead>
+  {% for channel in channels %}
+    <tr>
+      <td class="topic-col"><a href="/channel/{{channel['id']}}">{{channel["topic"]}}</a></td>
+      <td>{{channel["creator"]}}</td>
+      <td>{{channel['lastactive']}}</td>
+    </tr>
+  {% endfor %}
+
+  </table>
+</div>
+<script src="{{url_for('static', filename='index.js')}}" charset="utf-8"></script>
+{% endblock %}
