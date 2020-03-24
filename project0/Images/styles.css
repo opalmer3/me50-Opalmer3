@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+}
+
+footer {
+  background-color: #66BFBF;
+  line-height: 2;
+  margin: 0;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #66BFBF;
+  font-family: 'Sacramento', cursive;
+  font-size: 5rem;
+  margin: 0 auto;
+}
+
+h2 {
+  color: #66BFBF;
+  font-family: 'Rubik', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 auto 25px auto;
+}
+
+h3 {
+  color: #11999E;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 auto 0 auto;
+}
+
+a {
+  color: #11999E;
+}
+
+button {
+  margin: 20px;
+}
+
+hr {
+  border-color: #404b69;
+  border-top-style: dotted;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-top-width: 15px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  padding-top: 0;
+  width: 100px;
+}
+
+th, tr, p {
+  color: #404b69;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  margin: 5px auto 5px auto;
+}
+
+td {
+  font-weight: 400;
+}
+
+input {
+  width: 250px;
+}
+
+input, textarea {
+  display: block;
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  margin: 20px auto;
+}
+
+textarea {
+  height: 250px;
+  width: 60%;
+}
+
+.container-fluid {
+  background-color: #dff4f3;
+  margin: 0;
+  text-align: center;
+}
+
+.cloud1 {
+  height: 100px;
+  position: relative;
+  right: 200px;
+  top: 150px;
+}
+
+.cloud2 {
+  height: 100px;
+  position: relative;
+  left: 200px;
+  top: 20px;
+}
+
+.earth {
+  height: 250px;
+  margin-top: 65px;
+}
+
+.heading-img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.navbar-nav {
+  margin: 0 auto;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #66BFBF;
+  padding: 0 20px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #11999E;
+}
+
+.profile {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.col-md-4 {
+  text-align: center;
+}
+
+.hobbies-img {
+  height: 125px;
+  margin: 0 auto;
+}
+
+.hobby-box {
+  margin: 50px 0;
+}
+
+.hobbies-row {
+  width: 70%;
+  text-align: left;
+  margin: 0 auto;
+}
+
+#my-table {
+  margin: 20px auto 0 auto;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .hobbies-img {
+    padding-bottom: 20px;
+  }
+
+  .hobbies-row {
+    text-align: justify;
+    width: 90%;
+  }
+
+  #my-table {
+    width: 90%;
+  }
+}
