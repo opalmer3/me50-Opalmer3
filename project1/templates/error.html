@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Error {{code}}{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+  <h1>Error {{code}}</h1>
+  {{message}}  
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}: Register {% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+
+
+<div class="register-box">
+
+
+<form action="/register" method="post" id="myform" onsubmit="return check();">
+  <input type="text" name="name" placeholder="Name" autocomplete="off">
+  <input type="text" name="username" placeholder="Username" autocomplete="off">
+  <div id="username"></div>
+  <input type="email" name="email" placeholder="Email">
+  <input type="password" name="password" placeholder="Password">
+  <input type="password" name="confirm" placeholder="Confirm password">
+  <button class="btn btn-outline-dark" type="submit">Register</button>
+</form>
+
+<div id="error">{{message}}</div>
+</div>
+</div>
+<script>
+
+  function check() {
+    var error = false;
+    var errormsg = "Please enter a value into the following fields:<br>"
+
+// iterates through each input adding the name attribute to the error message if empty
+    $("input").each(function() {
+      if (!$(this).val()) {
+        errormsg = errormsg + ($(this).attr("name")) + "<br>";
+        error = true;
+      }
+    });
+
+    if ($("input[name=password]").val() != $("input[name=confirm]").val()) {
+      errormsg = errormsg + "And your passwords do not match<br>";
+      error = true;
+    }
+
+    if (error == true) {
+      $("#error").html(errormsg);
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  $("input[name=username]").on("keyup", function() {
+    $.get("/check?username=" + $("input[name=username]").val(), function(data) {
+      if (data == false) {
+        $("#username").text("Username unavailable");
+      } else {
+        $("#username").text("");
+      }
+    });
+  });
+</script>
+{% endblock %}

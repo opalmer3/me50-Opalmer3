@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}: Log in {% endblock %}
+
+{% block main %}
+<div class="page-container">
+
+<div class="login-register-box">
+
+<form action="/login" method="post" onsubmit="return check();" id=myForm>
+  <input type="text" name="username" placeholder="Username">
+  <input type="password" name="password" placeholder="Password">
+  <button class="btn btn-outline-dark" type="submit">Log in</button>
+</form>
+<div id="error">{{message}}</div>
+</div>
+</div>
+<script>
+
+function check(){
+
+ 	if(!$("input[name=username]").val()){
+		$("#error").text("Please enter a username");
+		return false;
+	}
+
+	if(!$("input[name=password]").val()){
+		$("#error").text("Please enter a password");
+		return false;
+	}
+}
+
+</script>
+
+{% endblock %}

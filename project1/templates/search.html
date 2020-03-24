@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}: Search {% endblock %}
+
+{% block main %}
+{% if rows|length %}
+<div class="page-container-no-bg">
+  <div class="banner-bg">
+      <form class="search-top"action="/search" method="get">
+        <input type="text" name="query" placeholder="Enter an ISBN, title or author" autocomplete="off">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+
+  </div>
+
+    <ul class="results">
+      {% for row in rows %}
+      <li><a href="/book?isbn={{row.isbn}}">{{row.isbn}}, {{row.title}}, {{row.author}}, {{row.year}}</a></li>
+      {% endfor %}
+    </ul>
+
+</div>
+{% else %}
+<div class="page-container">
+  <div class="search-box">
+    <form action="/search" method="get">
+      <input type="text" name="query" placeholder="Enter an ISBN, title or author" autocomplete="off">
+      <button class="btn btn-outline-dark" type="submit">Search</button>
+  <div>
+    {{message}}
+  </div>
+
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

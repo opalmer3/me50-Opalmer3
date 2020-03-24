@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}{{rows[0].title}}, {{rows[0].author}}, {{rows[0].year}}{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-lg-6">
+      <h1>{{rows[0].title}}</h1>
+      <h3>{{rows[0].author}}</h3>
+      <h3>{{rows[0].year}}</h3>
+      <h3>{{rows[0].isbn}}</h3>
+      <br>
+      <h3>Write a review</h3>
+      {% if session.user_id %}
+      <form class="review" action="/submitreview" onsubmit="return lencheck();" method="get">
+        <input id="rating" type="range" value="0" min=0 max=5 step=0.1 name="rating"><span id="score">/5.0</span><span id="ratingerror"></span>
+        <textarea name="text" rows="8" placeholder="Please enter at least 100 characters"></textarea>
+        <p id="charmessage">You have written 0 characters, please write 100 more to submit your review</p>
+        <button class="btn btn-outline-dark" type="submit" value="{{rows[0].isbn}}" name="isbn">Submit Review</button>
+      </form>
+      {{message}}
+      {% else %}
+      <div class="login-review-box">
+        <h4>Log in to write a review</h4>
+        <form class="login-review" action="/login" method="post" onsubmit="return check();" id=myForm>
+          <input type="text" name="username" placeholder="Username">
+          <input type="password" name="password" placeholder="Password">
+          <button class="btn btn-outline-dark" type="submit" name="url" value="{{url_for(request.endpoint)}}?isbn={{rows[0].isbn}}">Log in</button>
+        </form>
+
+        <div id="error">{{message}}</div>
+      </div>
+
+      {% endif %}
+    </div>
+    <div class="col-lg-6">
+
+      <h3>Reviews</h3>
+      <p class="goodbooks">{{res["books"][0]["average_rating"]}}/5.0 from {{res["books"][0]["work_ratings_count"]}} reviews at <a href="www.goodbooks.com"><b>Goodbooks</b></a></p>
+      {% if rows[0].rating is not none %}
+      {% for row in rows %}
+      <div>
+        <b><span>{{row.rating}}/5 by</span>
+          <span>{{usernames[loop.index]}}</span></b>
+        <p>{{row.text}}</p>
+      </div>
+      <hr>
+      {% endfor %}
+      {% else %}
+      <div class="">
+        <p>Be the first to review this book!</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+<script>
+  function check() {
+
+    if (!$("input[name=username]").val()) {
+      $("#error").text("Please enter a username");
+      return false;
+    }
+
+    if (!$("input[name=password]").val()) {
+      $("#error").text("Please enter a password");
+      return false;
+    }
+  }
+
+  // Check length of revew before submition
+  function lencheck(){
+    if ($("textarea").val().length < 100){
+      var len=false;
+    }
+
+    if ($("#rating").val() == 0){
+      var score = false;
+    }
+
+    if (len == false && score == false){
+      $("#charmessage").addClass("text-red");
+      $("#ratingerror").addClass("text-red");
+      $("#ratingerror").text("The minimum rating is 0.1")
+      setTimeout(function () {
+        $("#charmessage").removeClass("text-red");
+        $("#ratingerror").removeClass("text-red");
+      }, 200);
+    }
+
+    if (len == false){
+      $("#charmessage").addClass("text-red");
+      setTimeout(function () {
+        $("#charmessage").removeClass("text-red");
+      }, 200);
+    }
+    if (score == false){
+      $("#ratingerror").addClass("text-red");
+      $("#ratingerror").text("The minimum rating is 0.1")
+      setTimeout(function () {
+        $("#ratingerror").removeClass("text-red");
+      }, 200);
+    }
+    if (score == false || len == false){
+      return false;
+    }
+  }
+
+  $("input[name=rating]").on("change", function(){
+    var rating = parseFloat($("input[name=rating]").val()).toFixed(1);
+    $("#score").text( rating + "/5.0");
+    $("#ratingerror").text("")
+  });
+
+
+  // Update number of characters message on keyup
+    $("textarea").on("keyup", function(){
+      var numchars = $("textarea").val().length;
+      var remaining = 100 - numchars;
+      if (numchars >= 100){
+        $("#charmessage").text("");
+
+      }
+      else{
+       $("#charmessage").text("You have written " + numchars+ " characters, please write " + remaining + " more to submit your review");
+     }
+    });
+</script>
+{% endblock %}
